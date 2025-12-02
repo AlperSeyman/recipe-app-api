@@ -1,0 +1,50 @@
+Dockerfile → Written instructions for building the Image.
+
+Docker Image → The application blueprint/template created according to these instructions.
+
+Docker Container → The live application instance created by running this blueprint.
+
+Docker Compose → Exists to run multiple containers together as one application.
+
+.dockerignore → Do NOT copy these files into the image when building.
+
+** Dockerfile **
+
+COPY requirements.txt →	Put requirements inside container
+
+COPY app →	Put your app code inside container
+
+WORKDIR /app →	Set working folder to /app
+
+EXPOSE 8000 →  App will run on port 8000
+
+
+
+** Docker-Compose **
+
+version	→ Docker Compose file format
+
+services → list of containers
+
+app → your Django container
+
+build context → build Docker image from current folder
+
+ports →	map container 8000 : your computer 8000
+
+volumes → sync code between PC and container
+
+command	→ start Django server
+
+
+docker-compose run --rm app sh -c "flake8"
+
+docker-compose run --rm app sh -c "python manage.py test"
+
+docker-compose up → Start app and see logs
+
+docker-compose up -d → Start app in background
+
+docker-compose up --build → Build image first, then start app
+
+docker-compose down → Stop all containers
