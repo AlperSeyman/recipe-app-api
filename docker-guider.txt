@@ -24,7 +24,7 @@ EXPOSE 8000 →  App will run on port 8000
 
 version	→ Docker Compose file format
 
-services → list of containers
+services → list of containers (Which apps do we want to run?)
 
 app → your Django container
 
@@ -32,9 +32,22 @@ build context → build Docker image from current folder
 
 ports →	map container 8000 : your computer 8000
 
-volumes → sync code between PC and container
+volumes → sync code between PC and container (the folder on your PC: ./app is connected to the folder inside container: /app, Django sees changes immediately)
 
 command	→ start Django server
+
+environment → This is how Django knows how to connect to the database.
+
+depends-on → Django must start after the database container starts
+
+database part
+
+    db → Which Docker image to use (This is a ready Postgres database.)
+
+    volume →  A volume is a folder where Docker saves data permanently. For the database (This makes your data persistent. Even if you delete containers → your database data stays saved.) 
+
+    environment → Database setup 
+
 
 
 docker-compose run --rm app sh -c "flake8"
