@@ -151,7 +151,7 @@ class PrivateUserApiTests(TestCase):
         res=self.client.get(ME_URL)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(res.data, {'name':self.user.name, 'email':self.user.email})
+        self.assertEqual(res.data, {'name':self.user.name, 'email':self.user.email,})
 
     def test_post_me_not_allowed(self):
         """Test POST is not allowed for the 'me' endpoint"""
@@ -162,10 +162,9 @@ class PrivateUserApiTests(TestCase):
     def test_update_user_profile(self):
         """Test updating the user profile for the authenticated user."""
         payload = {
-            'name':'Updating Name',
-            'password':'newpass',
+            'name':'Updated Name',
+            'password':'newpassword1234',
         }
-
         res=self.client.patch(ME_URL, payload)
 
         self.user.refresh_from_db()

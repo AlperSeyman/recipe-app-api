@@ -19,6 +19,24 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
+    def update(self, instance, validated_data):
+        """Update and return user."""
+        # 1. Remove password from data 'bag' so super().update() doesn't save it as plain text.
+        # If no password is provided in the request, 'None' is returned.
+        password=validated_data.pop('password', None)
+
+        # 2. Use the default update logic to handle 'safe' fields like 'name' and 'email'.
+        # Because we 'popped' the password, this line only sees and updates non-sensitive fields.
+        user = super().update(instance, validated_data)
+
+        # 3. If a new password was provided, encrypt (hash) it before saving to the database
+        if password:
+            user.set_password(password)
+            user.save()
+
+        return user
+
+
 class AuthTokenSeriallizer(serializers.Serializer):
     """Serializer for the user auth token."""
     email = serializers.EmailField()
