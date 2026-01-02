@@ -1,0 +1,4 @@
+- Override or change behaviour of dependencies
+- Avoid unintended side effects
+- Isolate code being tested
+

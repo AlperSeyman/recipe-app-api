@@ -55,18 +55,19 @@ class ModelTest(TestCase):
         self.assertTrue(user.is_active)
 
     def test_create_recipe(self):
-        """Test creating a recipe is succesfull"""
+        "Testing creating a recipe is successful."
         User = get_user_model()
         user = User.objects.create_user(
-            email='test@example.com',
-            password='testpass123'
+            email="test@example.com",
+            password="testpass123"
         )
+
         recipe = models.Recipe.objects.create(
             user=user,
-            title='Sample recipe name',
-            time_minutes=5,
-            price=Decimal('5.50'),
-            description='Sample recipe description'
+            title="Sample recipe name",
+            time_minutes="5",
+            price="123.123123",
+            description="Sample recipe description",
         )
 
         self.assertEqual(str(recipe), recipe.title)
