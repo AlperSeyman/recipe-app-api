@@ -14,7 +14,6 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
         read_only_fields = ['id']
 
-
 class RecipeSerializer(serializers.ModelSerializer):
     """Serializer for the recipe"""
 
@@ -26,7 +25,5 @@ class RecipeSerializer(serializers.ModelSerializer):
 class RecipeDetailSerializer(RecipeSerializer):
     """Serializer for the recipe detail view."""
 
-    tags = TagSerializer(many=True, read_only=True)
-
     class Meta(RecipeSerializer.Meta):
-        fields = RecipeSerializer.Meta.fields + ["description",  "tags"]
+        fields = RecipeSerializer.Meta.fields + ["description"]
