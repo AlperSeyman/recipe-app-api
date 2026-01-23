@@ -20,7 +20,7 @@ def create_user(email='user@example.com', password='testpass123'):
 
 def detail_url(ingredient_id):
     """Create and return a ingredient url"""
-    return reverse('recipe:ingredient-list', args=[ingredient_id])
+    return reverse('recipe:ingredient-detail', args=[ingredient_id])
 
 class PublicIngredientAPITest(TestCase):
     """Test unauthenticated API request."""
@@ -84,3 +84,14 @@ class PrivateIngredientAPITest(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         ingredient.refresh_from_db()
         self.assertEqual(ingredient.name, payload['name'])
+
+    def test_delete_ingredient(self):
+        """Test deleting a ingredient successful."""
+        ingredient = Ingredient.objects.create(user=self.user, name='')
+
+        url = detail_url(ingredient.id)
+
+        res = self.client.delete(url)
+
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Ingredient.objects.filter(id=ingredient.id).exists())
