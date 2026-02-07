@@ -1,10 +1,10 @@
 Dockerfile → Written instructions for building the Image.
 
-Docker Image → The application blueprint/template created according to these instructions.
+Docker Image → The application blueprint/template created according to these instructions. (The Recipe)
 
-Docker Container → The live application instance created by running this blueprint.
+Docker Container → The live application instance created by running this blueprint. (The Cake)
 
-Docker Compose → Exists to run multiple containers together as one application.
+Docker Compose → Exists to run multiple containers together as one application. (The Manager )
 
 .dockerignore → Do NOT copy these files into the image when building.
 
@@ -44,9 +44,9 @@ database part
 
     db → Which Docker image to use (This is a ready Postgres database.)
 
-    volume →  A volume is a folder where Docker saves data permanently. For the database (This makes your data persistent. Even if you delete containers → your database data stays saved.) 
+    volume →  A volume is a folder where Docker saves data permanently. For the database (This makes your data persistent. Even if you delete containers → your database data stays saved.)
 
-    environment → Database setup 
+    environment → Database setup
 
 
 
